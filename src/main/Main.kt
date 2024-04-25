@@ -1,3 +1,6 @@
+import com.google.gson.Gson
+import src.main.kotlin.Game
+import src.main.kotlin.InfoGame
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
@@ -15,4 +18,13 @@ fun main () {
     val json = response.body()
     println(json)
 
+    val gson = Gson()
+    val myInfoGame = gson.fromJson(json, InfoGame::class.java)
+
+    val myGame = Game(
+            myInfoGame.info.title,
+            myInfoGame.info.thumb
+    )
+
+    println(myGame)
 }
